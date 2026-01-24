@@ -1,73 +1,88 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 
 const BackgroundEffects = () => {
+    let mouseX = useMotionValue(0);
+    let mouseY = useMotionValue(0);
+
+    function handleMouseMove({ currentTarget, clientX, clientY }) {
+        let { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    }
+
     return (
-        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-            {/* 1. Moving Grid Layer */}
-            <div className="absolute inset-0 opacity-[0.15] dark:opacity-[0.2]">
+        <div
+            className="fixed inset-0 z-0 overflow-hidden"
+            onMouseMove={handleMouseMove}
+        >
+            {/* 1. Base Grid Layer */}
+            <div className="absolute inset-0 opacity-[0.1] dark:opacity-[0.15]">
                 <div
-                    className="absolute inset-0 bg-[linear-gradient(to_right,#0891b2_1px,transparent_1px),linear-gradient(to_bottom,#0891b2_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_70%,transparent_100%)]"
+                    className="absolute inset-0 bg-[linear-gradient(to_right,#0891b2_1px,transparent_1px),linear-gradient(to_bottom,#0891b2_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
                 />
             </div>
 
-            {/* 2. Ambient Gradient Orbs */}
+            {/* 2. Mouse Spotlight Effect */}
             <motion.div
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                    x: [0, 50, 0],
-                    y: [0, 30, 0]
+                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+                style={{
+                    background: useMotionTemplate`
+            radial-gradient(
+              650px circle at ${mouseX}px ${mouseY}px,
+              rgba(34, 211, 238, 0.15),
+              transparent 80%
+            )
+          `,
                 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
             />
 
+            {/* 3. Global Ambient Spotlight (Always visible) */}
             <motion.div
-                animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                    x: [0, -30, 0],
-                    y: [0, 50, 0]
+                className="pointer-events-none absolute inset-0 transition duration-300"
+                style={{
+                    background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(34, 211, 238, 0.05),
+              transparent 40%
+            )
+          `,
                 }}
-                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/30 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
             />
 
-            <motion.div
-                animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.2, 0.4, 0.2],
-                    x: [0, 40, 0],
-                    y: [0, -40, 0]
-                }}
-                transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-                className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen"
-            />
-
-            {/* 3. Floating Particles */}
-            {[...Array(5)].map((_, i) => (
+            {/* 4. Animated Pulse Lines (Simulating Data Flow) */}
+            <div className="absolute inset-0 pointer-events-none">
+                {/* Horizontal Pulse */}
                 <motion.div
-                    key={i}
-                    className="absolute bg-cyan-400/30 rounded-full"
-                    style={{
-                        width: Math.random() * 4 + 2 + 'px',
-                        height: Math.random() * 4 + 2 + 'px',
-                        top: Math.random() * 100 + '%',
-                        left: Math.random() * 100 + '%',
-                    }}
+                    className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"
                     animate={{
-                        y: [0, -100, 0],
-                        opacity: [0, 0.8, 0],
+                        top: ['0%', '100%'],
+                        opacity: [0, 1, 0]
                     }}
                     transition={{
-                        duration: Math.random() * 10 + 10,
-                        repeat: Infinity,
+                        duration: 8,
                         ease: "linear",
-                        delay: Math.random() * 5
+                        repeat: Infinity,
+                        repeatDelay: 2
                     }}
                 />
-            ))}
+
+                {/* Vertical Pulse */}
+                <motion.div
+                    className="absolute w-[1px] h-full bg-gradient-to-b from-transparent via-blue-500/50 to-transparent"
+                    animate={{
+                        left: ['0%', '100%'],
+                        opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                        duration: 12,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatDelay: 0
+                    }}
+                />
+            </div>
         </div>
     );
 };

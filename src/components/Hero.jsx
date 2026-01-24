@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp } from 'lucide-react';
+import Typewriter from './Typewriter';
 
 const Hero = () => {
     return (
@@ -20,10 +21,10 @@ const Hero = () => {
                             <TrendingUp className="w-4 h-4 mr-2" />
                             <span>Next Gen Investing</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-4">
+                        <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-4 min-h-[160px] md:min-h-[220px]">
                             Your Wealth, <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-neon-cyan dark:to-neon-blue text-glow">
-                                Powered by Intelligence
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-neon-cyan dark:to-neon-blue text-glow block mt-2">
+                                <Typewriter text="Powered by Intelligence" delay={50} />
                             </span>
                         </h1>
                         <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-lg leading-relaxed">
