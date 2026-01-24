@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 
 const BackgroundEffects = () => {
     let mouseX = useMotionValue(0);
     let mouseY = useMotionValue(0);
 
-    function handleMouseMove({ currentTarget, clientX, clientY }) {
-        let { left, top } = currentTarget.getBoundingClientRect();
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
-    }
+    useEffect(() => {
+        const handleMouseMove = ({ clientX, clientY }) => {
+            mouseX.set(clientX);
+            mouseY.set(clientY);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [mouseX, mouseY]);
 
     return (
-        <div
-            className="fixed inset-0 z-0 overflow-hidden"
-            onMouseMove={handleMouseMove}
-        >
+        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
             {/* 1. Base Grid Layer */}
             <div className="absolute inset-0 opacity-[0.1] dark:opacity-[0.15]">
                 <div
@@ -27,6 +28,7 @@ const BackgroundEffects = () => {
             <motion.div
                 className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
                 style={{
+                    opacity: 1,
                     background: useMotionTemplate`
             radial-gradient(
               650px circle at ${mouseX}px ${mouseY}px,
@@ -50,39 +52,6 @@ const BackgroundEffects = () => {
           `,
                 }}
             />
-
-            {/* 4. Animated Pulse Lines (Simulating Data Flow) */}
-            <div className="absolute inset-0 pointer-events-none">
-                {/* Horizontal Pulse */}
-                <motion.div
-                    className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"
-                    animate={{
-                        top: ['0%', '100%'],
-                        opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                        duration: 8,
-                        ease: "linear",
-                        repeat: Infinity,
-                        repeatDelay: 2
-                    }}
-                />
-
-                {/* Vertical Pulse */}
-                <motion.div
-                    className="absolute w-[1px] h-full bg-gradient-to-b from-transparent via-blue-500/50 to-transparent"
-                    animate={{
-                        left: ['0%', '100%'],
-                        opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                        duration: 12,
-                        ease: "linear",
-                        repeat: Infinity,
-                        repeatDelay: 0
-                    }}
-                />
-            </div>
         </div>
     );
 };
