@@ -20,7 +20,7 @@ const BackgroundEffects = () => {
                     y: [0, 30, 0]
                 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[100px] mix-blend-screen"
+                className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
             />
 
             <motion.div
@@ -31,7 +31,7 @@ const BackgroundEffects = () => {
                     y: [0, 50, 0]
                 }}
                 transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/30 rounded-full blur-[100px] mix-blend-screen"
+                className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/30 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
             />
 
             <motion.div
@@ -42,7 +42,7 @@ const BackgroundEffects = () => {
                     y: [0, -40, 0]
                 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-                className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen"
+                className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen"
             />
 
             {/* 3. Floating Particles */}
