@@ -5,14 +5,13 @@ import { ArrowRight, TrendingUp } from 'lucide-react';
 const Hero = () => {
     return (
         <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-            {/* Background Elements */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-neon-cyan/20 rounded-full blur-[100px] animate-pulse"></div>
                 <div className="absolute bottom-20 right-10 w-96 h-96 bg-neon-blue/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
             </div>
 
             <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-                {/* Text Content */}
+
                 <div className="text-left space-y-8">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -50,16 +49,13 @@ const Hero = () => {
                     </motion.div>
                 </div>
 
-                {/* 3D Visual Placeholder */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1 }}
                     className="relative h-[400px] w-full flex items-center justify-center"
                 >
-                    {/* Abstract Growth Visualization */}
                     <div className="relative w-64 h-64 md:w-80 md:h-80">
-                        {/* Core */}
                         <motion.div
                             animate={{ rotate: 360 }}
                             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -67,7 +63,6 @@ const Hero = () => {
                         >
                         </motion.div>
 
-                        {/* Inner Ring */}
                         <motion.div
                             animate={{ rotate: -360 }}
                             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -75,7 +70,6 @@ const Hero = () => {
                         >
                         </motion.div>
 
-                        {/* Floating Elements (simulating 3D growth) */}
                         <motion.div
                             animate={{ y: [0, -20, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

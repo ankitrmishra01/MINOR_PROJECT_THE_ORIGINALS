@@ -29,19 +29,15 @@ const AuthPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
-        // Simulate API call
+
         setTimeout(() => {
             setIsLoading(false);
 
-            // Logic to determine name to show
             let displayName = 'Investor';
             if (!isLogin && formData.name) {
-                // If Signing Up, use the provided name
                 displayName = formData.name;
             } else if (isLogin && formData.email) {
-                // If Logging In, extract name from email as a fallback simulation
                 const emailName = formData.email.split('@')[0];
-                // Capitalize first letter
                 displayName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
             }
 
@@ -56,9 +52,8 @@ const AuthPage = () => {
 
     return (
         <div className="min-h-screen flex bg-gray-50 dark:bg-fintech-bg text-gray-900 dark:text-white overflow-hidden transition-colors duration-300">
-            {/* Left Side - Visual / Quote */}
+
             <div className="hidden lg:flex w-1/2 relative flex-col justify-between p-12 overflow-hidden bg-white/50 dark:bg-slate-900 border-r border-gray-200 dark:border-white/10">
-                {/* Background pattern */}
                 <div className="absolute inset-0 z-0 opacity-30">
                     <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611974765270-ca1258634369?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center grayscale dark:grayscale-0 transition-all duration-500"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-blue-100/40 to-transparent dark:from-fintech-bg dark:via-fintech-primary/80 dark:to-transparent"></div>
@@ -95,10 +90,8 @@ const AuthPage = () => {
                 </div>
             </div>
 
-            {/* Right Side - Form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-6 relative">
 
-                {/* Mobile Background (visible only on small screens) */}
                 <div className="absolute inset-0 z-0 lg:hidden">
                     <div className="absolute inset-0 bg-gray-50 dark:bg-fintech-bg transition-colors duration-300"></div>
                     <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/10 dark:bg-neon-cyan/10 rounded-full blur-[100px]"></div>
