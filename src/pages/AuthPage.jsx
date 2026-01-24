@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, ArrowRight, Github, Chrome, ArrowLeft } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, Github, Chrome, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 import { useTranslation } from 'react-i18next';
 
@@ -9,6 +9,7 @@ const AuthPage = () => {
     const { t } = useTranslation();
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -157,14 +158,31 @@ const AuthPage = () => {
                             <div className="relative group">
                                 <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-cyan-600 dark:group-focus-within:text-neon-cyan transition-colors" />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     required
                                     placeholder=" "
-                                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-10 py-3 text-gray-900 dark:text-white outline-none focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:bg-white dark:focus:bg-white/10 transition-all peer"
+                                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl pl-10 pr-12 py-3 text-gray-900 dark:text-white outline-none focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:bg-white dark:focus:bg-white/10 transition-all peer"
                                 />
                                 <label className={`absolute left-10 transition-all ${formData.password ? '-top-2.5 text-xs text-cyan-600 dark:text-neon-cyan' : 'top-3 text-sm text-gray-500 dark:text-gray-400'} peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan pointer-events-none bg-gray-50 dark:bg-fintech-card/50 px-1 ml-[-4px]`}>
                                     {t('password')}
                                 </label>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-3.5 text-gray-400 hover:text-cyan-600 dark:hover:text-neon-cyan transition-colors"
+                                >
+                                    <AnimatePresence mode="wait" initial={false}>
+                                        <motion.div
+                                            key={showPassword ? "hide" : "show"}
+                                            initial={{ opacity: 0, scale: 0.8, rotate: -90 }}
+                                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                                            exit={{ opacity: 0, scale: 0.8, rotate: 90 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </button>
                             </div>
 
                             {isLogin && (
