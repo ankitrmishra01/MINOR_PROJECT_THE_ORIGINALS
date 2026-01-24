@@ -132,7 +132,7 @@ const AuthPage = () => {
                                             placeholder=" "
                                             className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-10 py-3 text-gray-900 dark:text-white outline-none focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:bg-white dark:focus:bg-white/10 transition-all peer"
                                         />
-                                        <label className={`absolute left-10 transition-all ${formData.name ? '-top-2.5 text-xs text-cyan-600 dark:text-neon-cyan' : 'top-3 text-sm text-gray-500 dark:text-gray-400'} peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan pointer-events-none bg-gray-50 dark:bg-slate-900 px-1 ml-[-4px]`}>
+                                        <label className="absolute left-10 top-3 text-sm text-gray-500 dark:text-gray-400 transition-all bg-gray-50 dark:bg-fintech-card/50 px-1 ml-[-4px] pointer-events-none peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-cyan-600 dark:peer-[:not(:placeholder-shown)]:text-neon-cyan">
                                             {t('full_name')}
                                         </label>
                                     </motion.div>
@@ -150,7 +150,7 @@ const AuthPage = () => {
                                     placeholder=" "
                                     className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-10 py-3 text-gray-900 dark:text-white outline-none focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:bg-white dark:focus:bg-white/10 transition-all peer"
                                 />
-                                <label className={`absolute left-10 transition-all ${formData.email ? '-top-2.5 text-xs text-cyan-600 dark:text-neon-cyan' : 'top-3 text-sm text-gray-500 dark:text-gray-400'} peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan pointer-events-none bg-gray-50 dark:bg-fintech-card/50 px-1 ml-[-4px]`}>
+                                <label className="absolute left-10 top-3 text-sm text-gray-500 dark:text-gray-400 transition-all bg-gray-50 dark:bg-fintech-card/50 px-1 ml-[-4px] pointer-events-none peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-cyan-600 dark:peer-[:not(:placeholder-shown)]:text-neon-cyan">
                                     {t('email_address')}
                                 </label>
                             </div>
@@ -163,7 +163,7 @@ const AuthPage = () => {
                                     placeholder=" "
                                     className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl pl-10 pr-12 py-3 text-gray-900 dark:text-white outline-none focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:bg-white dark:focus:bg-white/10 transition-all peer"
                                 />
-                                <label className={`absolute left-10 transition-all ${formData.password ? '-top-2.5 text-xs text-cyan-600 dark:text-neon-cyan' : 'top-3 text-sm text-gray-500 dark:text-gray-400'} peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan pointer-events-none bg-gray-50 dark:bg-fintech-card/50 px-1 ml-[-4px]`}>
+                                <label className="absolute left-10 top-3 text-sm text-gray-500 dark:text-gray-400 transition-all bg-gray-50 dark:bg-fintech-card/50 px-1 ml-[-4px] pointer-events-none peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-cyan-600 dark:peer-focus:text-neon-cyan peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-cyan-600 dark:peer-[:not(:placeholder-shown)]:text-neon-cyan">
                                     {t('password')}
                                 </label>
                                 <button
