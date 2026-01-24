@@ -5,11 +5,11 @@ import Typewriter from './Typewriter';
 
 const Hero = () => {
     return (
-        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden pointer-events-none">
+        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
             {/* Background handled by BackgroundEffects.jsx */}
             <div className="absolute inset-0 z-0 pointer-events-none"></div>
 
-            <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10 pointer-events-auto">
+            <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
 
                 <div className="text-left space-y-8">
                     <motion.div
@@ -52,7 +52,7 @@ const Hero = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1 }}
-                    className="relative h-[400px] w-full flex items-center justify-center pointer-events-none"
+                    className="relative h-[400px] w-full flex items-center justify-center"
                 >
                     <div className="relative w-64 h-64 md:w-80 md:h-80">
                         <motion.div
