@@ -10,8 +10,8 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-white/10 glass-panel">
-            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4">
+        <nav className="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-white/10 glass-panel pointer-events-none">
+            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4 pointer-events-auto">
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-2">
                     <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
