@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const BackgroundEffects = () => {
     let mouseX = useMotionValue(0);
     let mouseY = useMotionValue(0);
+    const { theme } = useTheme();
 
     useEffect(() => {
         const handleMouseMove = ({ clientX, clientY }) => {
@@ -14,6 +16,14 @@ const BackgroundEffects = () => {
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [mouseX, mouseY]);
+
+    // Define color values based on theme
+    const isDark = theme === 'dark';
+
+    // Light mode: Darker Cyan (Cyan-700 equivalent) for visibility
+    // Dark mode: Light Cyan (Cyan-400 equivalent) for glow
+    const spotlightColor = isDark ? 'rgba(34, 211, 238, 0.15)' : 'rgba(8, 145, 178, 0.15)';
+    const ambientColor = isDark ? 'rgba(34, 211, 238, 0.05)' : 'rgba(8, 145, 178, 0.05)';
 
     return (
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -32,7 +42,7 @@ const BackgroundEffects = () => {
                     background: useMotionTemplate`
             radial-gradient(
               650px circle at ${mouseX}px ${mouseY}px,
-              rgba(34, 211, 238, 0.15),
+              ${spotlightColor},
               transparent 80%
             )
           `,
@@ -46,7 +56,7 @@ const BackgroundEffects = () => {
                     background: useMotionTemplate`
             radial-gradient(
               600px circle at ${mouseX}px ${mouseY}px,
-              rgba(34, 211, 238, 0.05),
+              ${ambientColor},
               transparent 40%
             )
           `,
