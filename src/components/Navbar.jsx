@@ -13,10 +13,15 @@ const Navbar = () => {
         <nav className="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-white/10 glass-panel">
             <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4">
                 {/* Logo */}
-                <Link to="/" className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <Activity className="h-8 w-8 text-neon-cyan" />
-                    <span className="self-center text-2xl font-bold whitespace-nowrap tracking-wide text-gray-900 dark:text-white">
-                        <span className="text-cyan-600 dark:text-neon-cyan">Cresta</span>
+                <Link to="/" className="flex items-center gap-2">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 15L85 75H15L50 15Z" stroke="#00D09C" strokeWidth="8" strokeLinejoin="round" />
+                        <circle cx="50" cy="45" r="5" fill="#00D09C" />
+                        <path d="M50 45L35 65M50 45L65 65" stroke="#00D09C" strokeWidth="4" strokeLinecap="round" />
+                    </svg>
+
+                    <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        Cresta<span className="text-[#00D09C]">.</span>
                     </span>
                 </Link>
 

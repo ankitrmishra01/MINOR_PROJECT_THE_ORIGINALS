@@ -41,9 +41,17 @@ const Sidebar = () => {
         >
             <div className="p-6 flex items-center justify-between">
                 {!collapsed && (
-                    <span className="text-xl font-bold tracking-wide text-gray-900 dark:text-white whitespace-nowrap overflow-hidden">
-                        <span className="text-cyan-600 dark:text-neon-cyan">Cresta</span>
-                    </span>
+                    <div className="flex items-center gap-2">
+                        <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 15L85 75H15L50 15Z" stroke="#00D09C" strokeWidth="8" strokeLinejoin="round" />
+                            <circle cx="50" cy="45" r="5" fill="#00D09C" />
+                            <path d="M50 45L35 65M50 45L65 65" stroke="#00D09C" strokeWidth="4" strokeLinecap="round" />
+                        </svg>
+
+                        <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            Cresta<span className="text-[#00D09C]">.</span>
+                        </span>
+                    </div>
                 )}
                 <button
                     onClick={toggleSidebar}
