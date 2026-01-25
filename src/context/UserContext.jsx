@@ -3,10 +3,7 @@ import React, { createContext, useState, useContext } from 'react';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({
-        name: 'Alex Morgan', // Default fallback
-        email: 'alex@example.com'
-    });
+    const [user, setUser] = useState(null);
 
     const login = (userData) => {
         setUser(userData);

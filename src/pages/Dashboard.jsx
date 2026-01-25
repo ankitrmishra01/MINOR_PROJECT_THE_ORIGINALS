@@ -9,6 +9,7 @@ import { DollarSign, Briefcase, Activity } from 'lucide-react';
 import MarketTicker from '../components/dashboard/MarketTicker';
 import { motion } from 'framer-motion';
 import Skeleton from '../components/Skeleton';
+import HoldingsTable from '../components/dashboard/HoldingsTable';
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -134,6 +135,11 @@ const Dashboard = () => {
                             <AIInsights delay={0.7} />
                         </div>
                     </div>
+                </motion.div>
+
+                {/* Holdings Table */}
+                <motion.div variants={itemVariants}>
+                    <HoldingsTable />
                 </motion.div>
             </motion.div>
         </DashboardLayout>

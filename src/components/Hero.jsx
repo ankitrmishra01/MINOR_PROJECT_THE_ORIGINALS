@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Typewriter from './Typewriter';
 
 const Hero = () => {
@@ -38,13 +39,20 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="flex flex-col sm:flex-row gap-4"
                     >
-                        <button className="glass-btn px-8 py-4 rounded-xl font-semibold text-cyan-900 dark:text-white flex items-center justify-center group">
+                        <Link
+                            to="/auth"
+                            state={{ isSignUp: true }}
+                            className="glass-btn px-8 py-4 rounded-xl font-semibold text-cyan-900 dark:text-white flex items-center justify-center group"
+                        >
                             Get Started
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <button className="px-8 py-4 rounded-xl font-semibold text-gray-600 dark:text-gray-300 hover:text-cyan-900 dark:hover:text-white border border-transparent hover:border-cyan-900/20 dark:hover:border-white/20 transition-all">
-                            View Demo
-                        </button>
+                        </Link>
+                        <Link
+                            to="/markets"
+                            className="px-8 py-4 rounded-xl font-semibold text-gray-600 dark:text-gray-300 hover:text-cyan-900 dark:hover:text-white border border-transparent hover:border-cyan-900/20 dark:hover:border-white/20 transition-all flex items-center justify-center"
+                        >
+                            Explore Markets
+                        </Link>
                     </motion.div>
                 </div>
 
