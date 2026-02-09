@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DashboardLayout from '../components/dashboard/DashboardLayout';
+import DashboardLayout from '../components/layout/DashboardLayout';
 import { motion } from 'framer-motion';
 import { Search, TrendingUp, TrendingDown, Clock, Filter } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';

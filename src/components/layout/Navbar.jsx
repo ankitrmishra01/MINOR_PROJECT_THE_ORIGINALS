@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Menu, X, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
-import LanguageSelector from './LanguageSelector';
+import ThemeToggle from '../common/ThemeToggle';
+import LanguageSelector from '../common/LanguageSelector';
 
 const Navbar = () => {
     const { t } = useTranslation();

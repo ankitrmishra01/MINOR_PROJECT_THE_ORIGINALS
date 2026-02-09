@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
 import { useUser } from '../../context/UserContext';
-import ThemeToggle from '../ThemeToggle';
+import ThemeToggle from '../common/ThemeToggle';
 
 const Header = () => {
     const { user } = useUser();

@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import Features from '../components/Features';
-import Footer from '../components/Footer';
+import Navbar from '../components/layout/Navbar';
+import Hero from '../components/landing/Hero';
+import Features from '../components/landing/Features';
+import Footer from '../components/layout/Footer';
 
-import BackgroundEffects from '../components/BackgroundEffects';
+import BackgroundEffects from '../components/common/BackgroundEffects';
 
 const LandingPage = () => {
     return (

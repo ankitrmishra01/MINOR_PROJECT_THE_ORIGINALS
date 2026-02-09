@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import Header from './Header';
+import Header from './DashboardHeader';
 import { Menu, X } from 'lucide-react'; // Import icons for mobile menu toggle
 
 

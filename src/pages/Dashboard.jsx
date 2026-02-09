@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import DashboardLayout from '../components/dashboard/DashboardLayout';
+import DashboardLayout from '../components/layout/DashboardLayout';
 import StatCard from '../components/dashboard/StatCard';
 import PortfolioChart from '../components/dashboard/PortfolioChart';
 import AssetAllocation from '../components/dashboard/AssetAllocation';
@@ -8,7 +8,7 @@ import AIInsights from '../components/dashboard/AIInsights';
 import { DollarSign, Briefcase, Activity } from 'lucide-react';
 import MarketTicker from '../components/dashboard/MarketTicker';
 import { motion } from 'framer-motion';
-import Skeleton from '../components/Skeleton';
+import Skeleton from '../components/common/Skeleton';
 import HoldingsTable from '../components/dashboard/HoldingsTable';
 
 const containerVariants = {

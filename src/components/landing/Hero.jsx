@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Typewriter from './Typewriter';
+import Typewriter from '../common/Typewriter';
 
 const Hero = () => {
     return (
