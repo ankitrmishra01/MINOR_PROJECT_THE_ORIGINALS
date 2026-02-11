@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import { motion } from 'framer-motion';
 import { Search, TrendingUp, TrendingDown, Clock, Filter } from 'lucide-react';
@@ -29,6 +30,7 @@ const topLosers = [
 ];
 
 const MarketsPage = () => {
+    const { t } = useTranslation();
     const { searchQuery } = useSearch();
     const [searchResult, setSearchResult] = useState(null);
     const [searchLoading, setSearchLoading] = useState(false);
@@ -87,11 +89,12 @@ const MarketsPage = () => {
                 );
 
                 // Map backend data to frontend format
-                const mappedData = responses.map((data, i) => ({
-                    name: data.index,
-                    value: data.latest_price,
-                    change: i === 2 ? -0.4 : 0.8, // Mock change for now as backend doesn't provide it
-                    isPositive: i !== 2
+                // Map backend data to frontend format
+                const mappedData = responses.map((data) => ({
+                    name: data.name,
+                    value: data.value,
+                    change: data.percent, // Using percent string directly for display
+                    isPositive: String(data.change || '').startsWith('+')
                 }));
                 setIndicesData(mappedData);
                 setError(null);
@@ -134,11 +137,11 @@ const MarketsPage = () => {
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Market Watch</h1>
-                        <p className="text-gray-500 dark:text-gray-400">Live global market updates and stock analysis</p>
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('market_watch')}</h1>
+                        <p className="text-gray-500 dark:text-gray-400">{t('markets_subtitle')}</p>
 
                         {/* Search Status */}
-                        {searchLoading && <p className="text-cyan-600 mt-2 animate-pulse">Searching for "{searchQuery}"...</p>}
+                        {searchLoading && <p className="text-cyan-600 mt-2 animate-pulse">{t('searching_for')} "{searchQuery}"...</p>}
                         {searchError && <p className="text-red-500 mt-2">Error: {searchError}</p>}
 
                         {/* Main Status Indicators */}
@@ -150,7 +153,7 @@ const MarketsPage = () => {
                         )}
                         {error && (
                             <div className="mt-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 p-3 rounded border border-red-200 dark:border-red-800/30">
-                                <p className="font-bold">⚠️ Connection Error</p>
+                                <p className="font-bold">⚠️ {t('connection_error')}</p>
                                 <p>{error}</p>
                                 <p className="text-xs mt-1 text-gray-500">
                                     Troubleshooting:<br />
@@ -173,25 +176,25 @@ const MarketsPage = () => {
                         <div className="absolute top-0 right-0 p-4 opacity-10">
                             <TrendingUp className="w-24 h-24 text-cyan-500" />
                         </div>
-                        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Search Result</h2>
+                        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('search_result')}</h2>
                         <div className="flex items-center gap-8">
                             <div>
-                                <div className="text-sm text-gray-500 dark:text-gray-400">Symbol</div>
+                                <div className="text-sm text-gray-500 dark:text-gray-400">{t('symbol')}</div>
                                 <div className="text-2xl font-bold text-cyan-600 dark:text-neon-cyan">{searchResult.symbol}</div>
                                 <div className="text-sm text-gray-600 dark:text-gray-300">{searchResult.name}</div>
                             </div>
                             <div>
-                                <div className="text-sm text-gray-500 dark:text-gray-400">Price</div>
+                                <div className="text-sm text-gray-500 dark:text-gray-400">{t('price')}</div>
                                 <div className="text-2xl font-bold text-gray-900 dark:text-white">₹{searchResult.price}</div>
                             </div>
                             <div>
-                                <div className="text-sm text-gray-500 dark:text-gray-400">Change</div>
+                                <div className="text-sm text-gray-500 dark:text-gray-400">{t('change')}</div>
                                 <div className={`text-xl font-bold ${searchResult.change_percent >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
                                     {searchResult.change_percent}%
                                 </div>
                             </div>
                             <div>
-                                <div className="text-sm text-gray-500 dark:text-gray-400">Volume</div>
+                                <div className="text-sm text-gray-500 dark:text-gray-400">{t('volume')}</div>
                                 <div className="text-xl font-bold text-gray-700 dark:text-gray-300">{searchResult.volume.toLocaleString()}</div>
                             </div>
                         </div>
@@ -212,11 +215,11 @@ const MarketsPage = () => {
                                 <div>
                                     <h3 className="text-gray-500 dark:text-gray-400 font-medium">{index.name}</h3>
                                     <div className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                                        {index.value.toLocaleString()}
+                                        {index.value}
                                     </div>
                                 </div>
                                 <div className={`px-2.5 py-1 rounded-full text-xs font-semibold ${index.isPositive ? 'bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-red-100 dark:bg-red-500/10 text-red-600 dark:text-red-400'}`}>
-                                    {index.isPositive ? '+' : ''}{index.change}%
+                                    {index.change}
                                 </div>
                             </div>
                             <div className="h-16">
@@ -253,13 +256,13 @@ const MarketsPage = () => {
                                     onClick={() => setSelectedTab('gainers')}
                                     className={`pb-2 text-sm font-semibold transition-colors border-b-2 ${selectedTab === 'gainers' || selectedTab === 'overview' ? 'text-cyan-600 dark:text-neon-cyan border-cyan-600 dark:border-neon-cyan' : 'text-gray-500 border-transparent hover:text-gray-700 dark:hover:text-gray-300'}`}
                                 >
-                                    Top Gainers
+                                    {t('top_gainers')}
                                 </button>
                                 <button
                                     onClick={() => setSelectedTab('losers')}
                                     className={`pb-2 text-sm font-semibold transition-colors border-b-2 ${selectedTab === 'losers' ? 'text-cyan-600 dark:text-neon-cyan border-cyan-600 dark:border-neon-cyan' : 'text-gray-500 border-transparent hover:text-gray-700 dark:hover:text-gray-300'}`}
                                 >
-                                    Top Losers
+                                    {t('top_losers')}
                                 </button>
                             </div>
 
@@ -267,10 +270,10 @@ const MarketsPage = () => {
                                 <table className="w-full">
                                     <thead>
                                         <tr className="text-left text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                            <th className="pb-4">Company</th>
-                                            <th className="pb-4 text-right">Price</th>
-                                            <th className="pb-4 text-right">Change</th>
-                                            <th className="pb-4 text-right hidden sm:table-cell">Volume</th>
+                                            <th className="pb-4">{t('company')}</th>
+                                            <th className="pb-4 text-right">{t('price')}</th>
+                                            <th className="pb-4 text-right">{t('change')}</th>
+                                            <th className="pb-4 text-right hidden sm:table-cell">{t('volume')}</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-white/5">
@@ -299,7 +302,7 @@ const MarketsPage = () => {
                     <div className="space-y-6">
                         <div className="glass-panel p-6 rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-fintech-card/50">
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-cyan-500" /> Market News
+                                <Clock className="w-4 h-4 text-cyan-500" /> {t('market_news')}
                             </h3>
                             <div className="space-y-4">
                                 {[1, 2, 3].map((i) => (
@@ -312,7 +315,7 @@ const MarketsPage = () => {
                                 ))}
                             </div>
                             <button className="w-full mt-6 py-2 text-sm text-cyan-600 dark:text-neon-cyan font-medium border border-cyan-600/30 dark:border-neon-cyan/30 rounded-lg hover:bg-cyan-50 dark:hover:bg-neon-cyan/10 transition-colors">
-                                Read More
+                                {t('read_more')}
                             </button>
                         </div>
                     </div>

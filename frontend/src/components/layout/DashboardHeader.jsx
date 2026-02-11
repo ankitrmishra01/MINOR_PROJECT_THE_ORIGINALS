@@ -1,19 +1,24 @@
 import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import ThemeToggle from '../common/ThemeToggle';
 import { useSearch } from '../../context/SearchContext';
+
 
 const Header = () => {
     const { user } = useUser();
     const { setSearchQuery } = useSearch();
     const displayName = user?.name || 'Investor';
+    const location = useLocation();
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
             setSearchQuery(e.target.value);
         }
     };
+
+
 
     return (
         <header className="flex items-center justify-between px-8 py-5 border-b border-gray-200 dark:border-white/10 bg-white/50 dark:bg-fintech-bg/50 backdrop-blur-md sticky top-0 z-10 transition-colors duration-300">
@@ -26,15 +31,18 @@ const Header = () => {
 
             <div className="flex items-center gap-6">
                 {/* Search */}
-                <div className="relative hidden md:block">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                        type="text"
-                        placeholder="Search assets (e.g. RELIANCE)..."
-                        onKeyDown={handleSearch}
-                        className="bg-gray-100 dark:bg-fintech-card/50 border border-transparent dark:border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-fintech-card focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:ring-2 ring-cyan-500/10 dark:ring-neon-cyan/10 w-64 transition-all placeholder:text-gray-500"
-                    />
-                </div>
+                {location.pathname === '/markets' && (
+                    <div className="relative hidden md:block">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                            type="text"
+                            placeholder="Search assets (e.g. RELIANCE)..."
+                            onKeyDown={handleSearch}
+                            className="bg-gray-100 dark:bg-fintech-card/50 border border-transparent dark:border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:bg-white dark:focus:bg-fintech-card focus:border-cyan-500/50 dark:focus:border-neon-cyan/50 focus:ring-2 ring-cyan-500/10 dark:ring-neon-cyan/10 w-64 transition-all placeholder:text-gray-500"
+                        />
+                    </div>
+                )}
+
 
                 {/* Notifications */}
                 <button className="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">

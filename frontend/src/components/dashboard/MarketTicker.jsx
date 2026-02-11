@@ -13,7 +13,38 @@ const defaultIndices = [
     { name: 'USD/INR', value: '83.45', change: '-0.05', percent: '-0.06%' },
 ];
 
-const MarketTicker = ({ indices = defaultIndices }) => {
+const MarketTicker = () => {
+    const [indices, setIndices] = React.useState(defaultIndices);
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        const fetchMarketData = async () => {
+            try {
+                // Use relative path so Vite proxy handles it
+                const response = await fetch('/api/market-status/');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch market data');
+                }
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    setIndices(data);
+                }
+            } catch (error) {
+                console.error('Error fetching market data:', error);
+                // Keep default indices on error or maybe set a flag
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMarketData();
+
+        // Refresh every 60 seconds
+        const interval = setInterval(fetchMarketData, 60000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="w-full bg-white/50 dark:bg-fintech-card/30 border-b border-gray-200 dark:border-white/10 overflow-hidden py-2 backdrop-blur-sm transition-colors duration-300">
             <div className="flex whitespace-nowrap">
@@ -29,7 +60,8 @@ const MarketTicker = ({ indices = defaultIndices }) => {
                     style={{ width: "fit-content" }}
                 >
                     {[...indices, ...indices].map((index, i) => {
-                        const isPositive = index.change.startsWith('+');
+                        const changeStr = String(index.change || '');
+                        const isPositive = changeStr.startsWith('+');
                         return (
                             <div key={i} className="flex items-center gap-2 text-sm">
                                 <span className="font-semibold text-gray-700 dark:text-gray-300">{index.name}</span>

@@ -5,84 +5,86 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ArrowLeft, CheckCircle, AlertTriangle } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-const questions = [
-    {
-        id: 1,
-        question: "What is your primary goal for this investment?",
-        options: [
-            { text: "Preserve my capital (Safety)", score: 1 },
-            { text: "Generate steady income", score: 2 },
-            { text: "Grow my wealth long-term", score: 3 },
-            { text: "Aggressive growth (Max returns)", score: 4 }
-        ]
-    },
-    {
-        id: 2,
-        question: "How long do you plan to keep this money invested?",
-        options: [
-            { text: "Less than 1 year", score: 1 },
-            { text: "1 - 3 years", score: 2 },
-            { text: "3 - 7 years", score: 3 },
-            { text: "More than 7 years", score: 4 }
-        ]
-    },
-    {
-        id: 3,
-        question: "What would you do if the market drops by 20% in a month?",
-        options: [
-            { text: "Sell everything immediately", score: 1 },
-            { text: "Sell some to cut losses", score: 2 },
-            { text: "Do nothing / Wait it out", score: 3 },
-            { text: "Buy more (Opportunity!)", score: 4 }
-        ]
-    },
-    {
-        id: 4,
-        question: "What is your current source of income?",
-        options: [
-            { text: "Retired / Pension", score: 1 },
-            { text: "Unstable / Freelance", score: 2 },
-            { text: "Stable Salary", score: 3 },
-            { text: "High Net Worth / Business", score: 4 }
-        ]
-    }
-];
 
-const profiles = {
-    conservative: {
-        label: "Conservative",
-        description: "You prioritize safety over returns. Better suited for bonds and stable funds.",
-        allocation: [
-            { name: 'Govt Bonds', value: 60, color: '#10B981' }, // Emerald
-            { name: 'Corporate Debt', value: 20, color: '#3B82F6' }, // Blue
-            { name: 'Large Cap Stocks', value: 15, color: '#F59E0B' }, // Amber
-            { name: 'Gold', value: 5, color: '#FCD34D' } // Yellow
-        ]
-    },
-    balanced: {
-        label: "Balanced",
-        description: "You seek a middle ground between risk and growth. A healthy mix of equity and debt.",
-        allocation: [
-            { name: 'Large Cap Stocks', value: 40, color: '#3B82F6' },
-            { name: 'Mid Cap Stocks', value: 20, color: '#8B5CF6' }, // Violet
-            { name: 'Bonds', value: 30, color: '#10B981' },
-            { name: 'Gold', value: 10, color: '#FCD34D' }
-        ]
-    },
-    aggressive: {
-        label: "Aggressive",
-        description: "You want maximum growth and can handle market volatility. High equity exposure.",
-        allocation: [
-            { name: 'Small Cap Stocks', value: 30, color: '#EC4899' }, // Pink
-            { name: 'Mid Cap Stocks', value: 30, color: '#8B5CF6' },
-            { name: 'Large Cap Stocks', value: 30, color: '#3B82F6' },
-            { name: 'Crypto/Alt', value: 10, color: '#06B6D4' } // Cyan
-        ]
-    }
-};
 
 const RiskAssessment = () => {
     const { t } = useTranslation();
+
+    const questions = [
+        {
+            id: 1,
+            question: t('risk_q1'),
+            options: [
+                { text: t('risk_q1_o1'), score: 1 },
+                { text: t('risk_q1_o2'), score: 2 },
+                { text: t('risk_q1_o3'), score: 3 },
+                { text: t('risk_q1_o4'), score: 4 }
+            ]
+        },
+        {
+            id: 2,
+            question: t('risk_q2'),
+            options: [
+                { text: t('risk_q2_o1'), score: 1 },
+                { text: t('risk_q2_o2'), score: 2 },
+                { text: t('risk_q2_o3'), score: 3 },
+                { text: t('risk_q2_o4'), score: 4 }
+            ]
+        },
+        {
+            id: 3,
+            question: t('risk_q3'),
+            options: [
+                { text: t('risk_q3_o1'), score: 1 },
+                { text: t('risk_q3_o2'), score: 2 },
+                { text: t('risk_q3_o3'), score: 3 },
+                { text: t('risk_q3_o4'), score: 4 }
+            ]
+        },
+        {
+            id: 4,
+            question: t('risk_q4'),
+            options: [
+                { text: t('risk_q4_o1'), score: 1 },
+                { text: t('risk_q4_o2'), score: 2 },
+                { text: t('risk_q4_o3'), score: 3 },
+                { text: t('risk_q4_o4'), score: 4 }
+            ]
+        }
+    ];
+
+    const profiles = {
+        conservative: {
+            label: t('profile_conservative'),
+            description: t('profile_conservative_desc'),
+            allocation: [
+                { name: 'Govt Bonds', value: 60, color: '#10B981' },
+                { name: 'Corporate Debt', value: 20, color: '#3B82F6' },
+                { name: 'Large Cap Stocks', value: 15, color: '#F59E0B' },
+                { name: 'Gold', value: 5, color: '#FCD34D' }
+            ]
+        },
+        balanced: {
+            label: t('profile_balanced'),
+            description: t('profile_balanced_desc'),
+            allocation: [
+                { name: 'Large Cap Stocks', value: 40, color: '#3B82F6' },
+                { name: 'Mid Cap Stocks', value: 20, color: '#8B5CF6' },
+                { name: 'Bonds', value: 30, color: '#10B981' },
+                { name: 'Gold', value: 10, color: '#FCD34D' }
+            ]
+        },
+        aggressive: {
+            label: t('profile_aggressive'),
+            description: t('profile_aggressive_desc'),
+            allocation: [
+                { name: 'Small Cap Stocks', value: 30, color: '#EC4899' },
+                { name: 'Mid Cap Stocks', value: 30, color: '#8B5CF6' },
+                { name: 'Large Cap Stocks', value: 30, color: '#3B82F6' },
+                { name: 'Crypto/Alt', value: 10, color: '#06B6D4' }
+            ]
+        }
+    };
     const [step, setStep] = useState(0);
     const [answers, setAnswers] = useState({});
     const [showResult, setShowResult] = useState(false);
@@ -120,12 +122,12 @@ const RiskAssessment = () => {
             <div className="max-w-4xl mx-auto">
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                        {showResult ? "Your Investment Profile" : "Risk Assessment"}
+                        {showResult ? t('investment_profile') : t('risk_assessment')}
                     </h1>
                     <p className="text-gray-600 dark:text-gray-400">
                         {showResult
-                            ? "Based on your answers, here represents our AI-driven recommendation."
-                            : "Help our AI understand your financial goals and tolerance."}
+                            ? t('profile_subtitle')
+                            : t('risk_subtitle')}
                     </p>
                 </div>
 
@@ -141,7 +143,7 @@ const RiskAssessment = () => {
                             >
                                 <div className="mb-8">
                                     <div className="flex justify-betweentext-sm text-gray-400 mb-2">
-                                        <span>Question {step + 1} of {questions.length}</span>
+                                        <span>{t('question_progress', { current: step + 1, total: questions.length })}</span>
                                     </div>
                                     <div className="w-full bg-gray-200 dark:bg-white/10 h-1.5 rounded-full">
                                         <div
@@ -182,7 +184,7 @@ const RiskAssessment = () => {
                                                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                                             }`}
                                     >
-                                        <ArrowLeft className="w-4 h-4" /> Back
+                                        <ArrowLeft className="w-4 h-4" /> {t('back')}
                                     </button>
                                     <button
                                         onClick={handleNext}
@@ -193,7 +195,7 @@ const RiskAssessment = () => {
                                                 : 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:shadow-cyan-500/25 transform hover:-translate-y-0.5'
                                             }`}
                                     >
-                                        {step === questions.length - 1 ? 'See Results' : 'Next'} <ArrowRight className="w-4 h-4" />
+                                        {step === questions.length - 1 ? t('see_results') : t('next')} <ArrowRight className="w-4 h-4" />
                                     </button>
                                 </div>
                             </motion.div>
@@ -247,15 +249,15 @@ const RiskAssessment = () => {
                                         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-100 dark:border-blue-500/30 flex gap-3">
                                             <AlertTriangle className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                                             <div>
-                                                <h4 className="font-semibold text-blue-900 dark:text-blue-100 text-sm">AI Recommendation</h4>
+                                                <h4 className="font-semibold text-blue-900 dark:text-blue-100 text-sm">{t('ai_recommendation')}</h4>
                                                 <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-                                                    We suggest rebalancing your portfolio to match this allocation for optimal returns adjusted for your risk tolerance.
+                                                    {t('recommendation_desc')}
                                                 </p>
                                             </div>
                                         </div>
 
                                         <div className="space-y-3">
-                                            <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Recommended Allocation</h4>
+                                            <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500">{t('recommended_allocation')}</h4>
                                             {riskProfile.allocation.map((item, idx) => (
                                                 <div key={idx} className="flex items-center justify-between">
                                                     <div className="flex items-center gap-2">
@@ -271,7 +273,7 @@ const RiskAssessment = () => {
                                             onClick={() => window.location.reload()}
                                             className="w-full mt-4 glass-btn py-3 rounded-xl font-semibold text-cyan-900 dark:text-white"
                                         >
-                                            Retake Assessment
+                                            {t('retake_assessment')}
                                         </button>
                                     </div>
                                 </div>

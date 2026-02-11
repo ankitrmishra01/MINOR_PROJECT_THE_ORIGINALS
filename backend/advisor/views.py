@@ -40,37 +40,92 @@ def get_market_data(symbol, name):
     if symbol in market_cache:
         cached_data = market_cache[symbol]
         if current_time - cached_data['timestamp'] < CACHE_DURATION:
+            latest_price = cached_data['price']
+            change = cached_data.get('change', 0.0)
+            percent_change = cached_data.get('percent', 0.0)
             return {
-                "index": name,
-                "latest_price": cached_data['price']
+                "name": name,
+                "value": f"{latest_price:,.2f}",
+                "change": f"{'+' if change >= 0 else ''}{change:,.2f}",
+                "percent": f"{'+' if percent_change >= 0 else ''}{percent_change}%"
             }
             
     # Fetch from API
     try:
         ticker = yf.Ticker(symbol)
-        data = ticker.history(period="1d")
+        data = ticker.history(period="2d") # Fetch 2 days to get previous close
+        
         if data.empty or "Close" not in data.columns:
              raise ValueError("No data found")
+             
         latest_price = round(data["Close"].iloc[-1], 2)
         
+        # Calculate change
+        if len(data) >= 2:
+            prev_close = data["Close"].iloc[-2]
+            change = round(latest_price - prev_close, 2)
+            percent_change = round((change / prev_close) * 100, 2)
+        else:
+            # Fallback if only 1 day data is available (e.g. new listing or API issue)
+            prev_close = latest_price
+            change = 0.0
+            percent_change = 0.0
+            
+            # Try getting previousClose from info if history is insufficient
+            try:
+                info = ticker.info
+                if 'previousClose' in info and info['previousClose']:
+                    prev_close = info['previousClose']
+                    change = round(latest_price - prev_close, 2)
+                    percent_change = round((change / prev_close) * 100, 2)
+            except:
+                pass
+
         # Update cache
         market_cache[symbol] = {
             'price': latest_price,
+            'change': change,
+            'percent': percent_change,
             'timestamp': current_time
         }
         
     except Exception:
         # If fetch fails, use cached if available (even if expired), or fallback
         if symbol in market_cache:
-             latest_price = market_cache[symbol]['price']
+             cached = market_cache[symbol]
+             latest_price = cached['price']
+             change = cached.get('change', 0.0)
+             percent_change = cached.get('percent', 0.0)
         else:
              # Hardcoded fallbacks
              latest_price = 24000.00 if "NSEI" in symbol else 79000.00 if "BSESN" in symbol else 51000.00
+             change = 0.0
+             percent_change = 0.0
     
     return {
-        "index": name,
-        "latest_price": latest_price
+        "name": name,
+        "value": f"{latest_price:,.2f}",
+        "change": f"{'+' if change >= 0 else ''}{change:,.2f}",
+        "percent": f"{'+' if percent_change >= 0 else ''}{percent_change}%"
     }
+
+def get_market_status(request):
+    indices = [
+        {"symbol": "^NSEI", "name": "NIFTY 50"},
+        {"symbol": "^BSESN", "name": "SENSEX"},
+        {"symbol": "^NSEBANK", "name": "BANK NIFTY"},
+        {"symbol": "^CNXIT", "name": "NIFTY IT"},
+        {"symbol": "^IXIC", "name": "NASDAQ"},
+        {"symbol": "^GSPC", "name": "S&P 500"},
+        {"symbol": "GC=F", "name": "GOLD"},
+        {"symbol": "INR=X", "name": "USD/INR"},
+    ]
+    
+    results = []
+    for index in indices:
+        results.append(get_market_data(index["symbol"], index["name"]))
+        
+    return JsonResponse(results, safe=False)
 
 def get_nifty(request):
     data = get_market_data("^NSEI", "NIFTY 50")
