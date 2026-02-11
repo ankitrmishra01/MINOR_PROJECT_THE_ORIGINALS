@@ -6,4 +6,5 @@ urlpatterns = [
     path("nifty/", views.get_nifty),
     path("sensex/", views.get_sensex),
     path("banknifty/", views.get_banknifty),
+    path("search/", views.search_stock),
 ]
