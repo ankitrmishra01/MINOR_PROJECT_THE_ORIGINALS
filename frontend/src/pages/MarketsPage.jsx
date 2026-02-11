@@ -197,6 +197,17 @@ const MarketsPage = () => {
                                 <div className="text-sm text-gray-500 dark:text-gray-400">{t('volume')}</div>
                                 <div className="text-xl font-bold text-gray-700 dark:text-gray-300">{searchResult.volume.toLocaleString()}</div>
                             </div>
+                            {searchResult.suggestion && (
+                                <div>
+                                    <div className="text-sm text-gray-500 dark:text-gray-400">Suggestion</div>
+                                    <div className={`text-lg font-bold px-3 py-1 rounded-lg inline-block ${searchResult.suggestion === 'Buy'
+                                        ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
+                                        : 'bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/30'
+                                        }`}>
+                                        {searchResult.suggestion}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}

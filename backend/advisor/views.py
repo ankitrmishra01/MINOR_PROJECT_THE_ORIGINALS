@@ -162,12 +162,14 @@ def search_stock(request):
                 })
 
         ticker = yf.Ticker(symbol)
-        data = ticker.history(period="1d")
+        data = ticker.history(period="5d")
         
         if data.empty:
              return JsonResponse({"error": "Stock not found"}, status=404)
         
         latest_price = round(data["Close"].iloc[-1], 2)
+        average_price = data["Close"].mean()
+        suggestion = "Buy" if latest_price < average_price else "Hold"
         
         # Try to get more info
         info = ticker.info
@@ -187,7 +189,8 @@ def search_stock(request):
             "name": name,
             "price": latest_price,
             "change_percent": change,
-            "volume": volume
+            "volume": volume,
+            "suggestion": suggestion
         })
 
     except Exception as e:
