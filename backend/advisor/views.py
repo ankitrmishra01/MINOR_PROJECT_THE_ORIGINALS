@@ -155,10 +155,11 @@ def search_stock(request):
             if time.time() - cached_data['timestamp'] < CACHE_DURATION:
                 return JsonResponse({
                     "symbol": symbol,
-                    "name": symbol, # yfinance sometimes slow to get full name
+                    "name": cached_data.get('name', symbol),
                     "price": cached_data['price'],
-                    "change_percent": 0.0, # Cache simplified for now
-                    "volume": "N/A"
+                    "change_percent": cached_data.get('change_percent', 0.0),
+                    "volume": cached_data.get('volume', "N/A"),
+                    "suggestion": cached_data.get('suggestion', "Hold") 
                 })
 
         ticker = yf.Ticker(symbol)
@@ -181,7 +182,11 @@ def search_stock(request):
         # Update cache
         market_cache[symbol] = {
             'price': latest_price,
-            'timestamp': time.time()
+            'timestamp': time.time(),
+            'name': name,
+            'change_percent': change,
+            'volume': volume,
+            'suggestion': suggestion
         }
         
         return JsonResponse({
