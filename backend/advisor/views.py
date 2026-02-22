@@ -200,3 +200,46 @@ def search_stock(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+import json
+import requests
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def google_login(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            access_token = data.get('access_token')
+            
+            if not access_token:
+                return JsonResponse({'error': 'No access_token provided'}, status=400)
+                
+            # Fetch user info from Google using the access token
+            response = requests.get(
+                'https://www.googleapis.com/oauth2/v3/userinfo',
+                headers={'Authorization': f'Bearer {access_token}'}
+            )
+            
+            if response.status_code != 200:
+                return JsonResponse({'error': 'Failed to fetch user info from Google'}, status=400)
+                
+            user_info = response.json()
+            email = user_info.get('email')
+            name = user_info.get('name', email.split('@')[0] if email else 'Google User')
+            picture = user_info.get('picture', '')
+            
+            # Return user details for the frontend context
+            return JsonResponse({
+                'success': True,
+                'user': {
+                    'email': email,
+                    'name': name,
+                    'picture': picture
+                }
+            })
+            
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+            
+    return JsonResponse({'error': 'Method not allowed'}, status=405)

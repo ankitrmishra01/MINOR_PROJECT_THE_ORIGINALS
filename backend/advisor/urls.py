@@ -8,4 +8,5 @@ urlpatterns = [
     path("banknifty/", views.get_banknifty),
     path("search/", views.search_stock),
     path("market-status/", views.get_market_status),
+    path("auth/google/", views.google_login),
 ]

@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, Github, Chrome, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 import { useTranslation } from 'react-i18next';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const AuthPage = () => {
     const { t } = useTranslation();
@@ -18,6 +19,36 @@ const AuthPage = () => {
     });
     const navigate = useNavigate();
     const { login } = useUser();
+
+    const loginWithGoogle = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            setIsLoading(true);
+            try {
+                const res = await fetch('http://localhost:8000/api/auth/google/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ access_token: tokenResponse.access_token })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    login(data.user);
+                    navigate('/dashboard');
+                } else {
+                    console.error('Backend Google Auth Failed:', data.error);
+                }
+            } catch (err) {
+                console.error('Google Auth Request Failed:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        onError: () => {
+            console.log('Google Login Failed');
+            setIsLoading(false);
+        }
+    });
 
     const toggleMode = () => setIsLogin(!isLogin);
 
@@ -217,7 +248,7 @@ const AuthPage = () => {
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <button className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-sm font-medium w-full text-gray-700 dark:text-white">
+                            <button type="button" onClick={() => loginWithGoogle()} className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-sm font-medium w-full text-gray-700 dark:text-white">
                                 <Chrome className="w-4 h-4" /> Google
                             </button>
                         </div>
