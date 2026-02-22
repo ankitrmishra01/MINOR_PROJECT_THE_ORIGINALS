@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Menu, X, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from '../common/ThemeToggle';
-import LanguageSelector from '../common/LanguageSelector';
 
 const Navbar = () => {
     const { t } = useTranslation();
@@ -54,9 +53,6 @@ const Navbar = () => {
                         </li>
                         <li className="mt-4 md:mt-0 p-2 md:p-0 flex justify-center md:block">
                             <ThemeToggle />
-                        </li>
-                        <li className="mt-4 md:mt-0 p-2 md:p-0 flex justify-center md:block">
-                            <LanguageSelector />
                         </li>
                     </ul>
                 </div>

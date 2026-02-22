@@ -6,6 +6,7 @@ import AuthPage from './pages/AuthPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import RiskAssessment from './pages/RiskAssessment';
 import MarketsPage from './pages/MarketsPage';
+import SettingsPage from './pages/SettingsPage';
 
 import { UserProvider } from './context/UserContext';
 import { SearchProvider } from './context/SearchContext'; // Added import
@@ -40,6 +41,13 @@ function App() {
                 <ProtectedRoute>
                   <SearchProvider>
                     <MarketsPage />
+                  </SearchProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/settings" element={
+                <ProtectedRoute>
+                  <SearchProvider>
+                    <SettingsPage />
                   </SearchProvider>
                 </ProtectedRoute>
               } />

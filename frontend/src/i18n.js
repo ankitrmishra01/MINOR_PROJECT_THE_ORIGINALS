@@ -107,7 +107,16 @@ const resources = {
             "profile_balanced": "Balanced",
             "profile_balanced_desc": "You seek a middle ground between risk and growth. A healthy mix of equity and debt.",
             "profile_aggressive": "Aggressive",
-            "profile_aggressive_desc": "You want maximum growth and can handle market volatility. High equity exposure."
+            "profile_aggressive_desc": "You want maximum growth and can handle market volatility. High equity exposure.",
+            "manage_your_account_and_preferences": "Manage your account settings and preferences.",
+            "profile": "Profile",
+            "appearance": "Appearance",
+            "language": "Language",
+            "profile_settings": "Profile Settings",
+            "customize_how_cresta_looks_on_your_device": "Customize how Cresta looks on your device.",
+            "light_mode": "Light Mode",
+            "dark_mode": "Dark Mode",
+            "select_language": "Select your preferred language for the interface."
         }
     },
     hi: {
@@ -214,7 +223,16 @@ const resources = {
             "profile_balanced": "संतुलित",
             "profile_balanced_desc": "आप जोखिम और वृद्धि के बीच संतुलन चाहते हैं। इक्विटी और ऋण का एक स्वस्थ मिश्रण।",
             "profile_aggressive": "आक्रामक",
-            "profile_aggressive_desc": "आप अधिकतम वृद्धि चाहते हैं और बाजार की अस्थिरता को संभाल सकते हैं। उच्च इक्विटी जोखिम।"
+            "profile_aggressive_desc": "आप अधिकतम वृद्धि चाहते हैं और बाजार की अस्थिरता को संभाल सकते हैं। उच्च इक्विटी जोखिम।",
+            "manage_your_account_and_preferences": "अपनी खाता सेटिंग और प्राथमिकताओं को प्रबंधित करें।",
+            "profile": "प्रोफ़ाइल",
+            "appearance": "उपस्थिति",
+            "language": "भाषा",
+            "profile_settings": "प्रोफ़ाइल सेटिंग्स",
+            "customize_how_cresta_looks_on_your_device": "कस्टमाइज़ करें कि क्रेस्टा आपके डिवाइस पर कैसा दिखता है।",
+            "light_mode": "लाइट मोड",
+            "dark_mode": "डार्क मोड",
+            "select_language": "इंटरफ़ेस के लिए अपनी पसंदीदा भाषा चुनें।"
         }
     },
     gu: {
@@ -321,7 +339,16 @@ const resources = {
             "profile_balanced": "સંતુલિત",
             "profile_balanced_desc": "તમે જોખમ અને વૃદ્ધિ વચ્ચે સંતુલન શોધો છો. ઇક્વિટી અને ડેટનું મિશ્રણ.",
             "profile_aggressive": "આક્રમક",
-            "profile_aggressive_desc": "તમે મહત્તમ વૃદ્ધિ ઇચ્છો છો અને બજારની અસ્થિરતા સંભાળી શકો છો. ઉચ્ચ ઇક્વિટી એક્સપોઝર."
+            "profile_aggressive_desc": "તમે મહત્તમ વૃદ્ધિ ઇચ્છો છો અને બજારની અસ્થિરતા સંભાળી શકો છો. ઉચ્ચ ઇક્વિટી એક્સપોઝર.",
+            "manage_your_account_and_preferences": "તમારા એકાઉન્ટ સેટિંગ્સ અને પસંદગીઓનું સંચાલન કરો.",
+            "profile": "પ્રોફાઇલ",
+            "appearance": "દેખાવ",
+            "language": "ભાષા",
+            "profile_settings": "પ્રોફાઇલ સેટિંગ્સ",
+            "customize_how_cresta_looks_on_your_device": "તમારા ઉપકરણ પર ક્રેસ્ટા કેવું દેખાય છે તે કસ્ટમાઇઝ કરો.",
+            "light_mode": "લાઇટ મોડ",
+            "dark_mode": "ડાર્ક મોડ",
+            "select_language": "ઇન્ટરફેસ માટે તમારી મનપસંદ ભાષા પસંદ કરો."
         }
     },
     pa: {
@@ -428,7 +455,16 @@ const resources = {
             "profile_balanced": "ਸੰਤੁਲਿਤ",
             "profile_balanced_desc": "ਤੁਸੀਂ ਜੋਖਮ ਅਤੇ ਵਿਕਾਸ ਦੇ ਵਿਚਕਾਰ ਸੰਤੁਲਨ ਚਾਹੁੰਦੇ ਹੋ। ਇਕਵਿਟੀ ਅਤੇ ਕਰਜ਼ੇ ਦਾ ਮਿਸ਼ਰਣ।",
             "profile_aggressive": "ਹਮਲਾਵਰ",
-            "profile_aggressive_desc": "ਤੁਸੀਂ ਵੱਧ ਤੋਂ ਵੱਧ ਵਿਕਾਸ ਚਾਹੁੰਦੇ ਹੋ ਅਤੇ ਬਾਜ਼ਾਰ ਦੀ ਅਸਥਿਰਤਾ ਨੂੰ ਸੰਭਾਲ ਸਕਦੇ ਹੋ। ਉੱਚ ਇਕਵਿਟੀ ਐਕਸਪੋਜ਼ਰ।"
+            "profile_aggressive_desc": "ਤੁਸੀਂ ਵੱਧ ਤੋਂ ਵੱਧ ਵਿਕਾਸ ਚਾਹੁੰਦੇ ਹੋ ਅਤੇ ਬਾਜ਼ਾਰ ਦੀ ਅਸਥਿਰਤਾ ਨੂੰ ਸੰਭਾਲ ਸਕਦੇ ਹੋ। ਉੱਚ ਇਕਵਿਟੀ ਐਕਸਪੋਜ਼ਰ।",
+            "manage_your_account_and_preferences": "ਆਪਣੀਆਂ ਖਾਤਾ ਸੈਟਿੰਗਾਂ ਅਤੇ ਤਰਜੀਹਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+            "profile": "ਪ੍ਰੋਫਾਈਲ",
+            "appearance": "ਦਿੱਖ",
+            "language": "ਭਾਸ਼ਾ",
+            "profile_settings": "ਪ੍ਰੋਫਾਈਲ ਸੈਟਿੰਗਾਂ",
+            "customize_how_cresta_looks_on_your_device": "ਆਪਣੀ ਡਿਵਾਈਸ 'ਤੇ ਕ੍ਰੈਸਟਾ ਕਿਵੇਂ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ ਇਸ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ।",
+            "light_mode": "ਲਾਈਟ ਮੋਡ",
+            "dark_mode": "ਡਾਰਕ ਮੋਡ",
+            "select_language": "ਇੰਟਰਫੇਸ ਲਈ ਆਪਣੀ ਪਸੰਦੀਦਾ ਭਾਸ਼ਾ ਚੁਣੋ।"
         }
     }
 };
